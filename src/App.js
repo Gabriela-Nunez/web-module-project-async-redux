@@ -1,29 +1,28 @@
 import React, { useEffect } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
-import axios from 'axios';
 
 import JokesForm from './components/jokesForm';
-import { fetchStart, fetchSuccess, fetchFail } from './actions';
+import { getJokes } from './actions';
+
 
 
 function App(props) {
-  const { jokeData, loading, error } = props;
+  const { jokeData, loading, error, getJokes } = props;
 
   useEffect(() => {
-    props.fetchStart();
-    axios.get('https://official-joke-api.appspot.com/random_joke')
-      .then(res => {
-        props.fetchSuccess(res.data);
-      })
-      .catch(err => {
-        props.fetchFail(err);
-      })
+   props.getJokes();
   }, [])
 
   return (
     <div className="App">
       <h1>Life is Too Beautiful to be Stressed, Have a Joke Instead!</h1>
+      <img 
+      className='image'
+      src='.images/laughingWomen.jpg'
+      alt='laughing women'
+      />
+   
       <JokesForm />
       { loading ? <h3>Loading...</h3> : 
       <h2>{jokeData.setup}
@@ -44,4 +43,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { fetchStart, fetchSuccess, fetchFail })(App);
+export default connect(mapStateToProps, { getJokes })(App);
