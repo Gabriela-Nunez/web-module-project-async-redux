@@ -6,7 +6,6 @@ import JokesForm from './components/jokesForm';
 import { getJokes } from './actions';
 
 
-
 function App(props) {
   const { jokeData, loading, error, getJokes } = props;
 
@@ -17,11 +16,6 @@ function App(props) {
   return (
     <div className="App">
       <h1>Life is Too Beautiful to be Stressed, Have a Joke Instead!</h1>
-      <img 
-      className='image'
-      src='.images/laughingWomen.jpg'
-      alt='laughing women'
-      />
    
       <JokesForm />
       { loading ? <h3>Loading...</h3> : 
